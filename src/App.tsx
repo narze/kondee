@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function shuffle(a: Array<any>): Array<any> {
@@ -9,7 +9,7 @@ function shuffle(a: Array<any>): Array<any> {
   return a;
 }
 
-let questions = shuffle([
+let defaultQuestions = [
   { question: "ทำบุญ?", points: 1 },
   { question: "พาคนแก่ข้ามถนน?", points: 1 },
   { question: "ช่วยงานชุมชน?", points: 1 },
@@ -23,14 +23,26 @@ let questions = shuffle([
   { question: "ชนะโอลิมปิก?", points: 0.5 },
   { question: "พับผ้าห่ม?", points: 1 },
   { question: "ช่วยเพื่อนตบมุก?", points: 1 },
-]).slice(0, 5);
+];
 
-questions.push({ question: "รักสถาบัน?", points: 112 });
+// defaultQuestions.push({ question: "รักสถาบัน?", points: 112 });
 
 function App() {
+  const [questions, setQuestions] = useState(defaultQuestions.slice(0, 5));
   const [points, setPoints] = useState(0);
   const [questionIdx, setQuestionIdx] = useState(0);
   const [result, setResult] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    chooseQuestions();
+  }, []);
+
+  function chooseQuestions() {
+    const chosenQuestions = shuffle(defaultQuestions).slice(0, 5);
+    chosenQuestions.push({ question: "รักสถาบัน?", points: 112 });
+
+    setQuestions(chosenQuestions);
+  }
 
   function answer(yes: boolean) {
     if (yes) {
@@ -55,6 +67,7 @@ function App() {
   function reset() {
     setPoints(0);
     setQuestionIdx(0);
+    chooseQuestions();
     setResult(undefined);
   }
 
