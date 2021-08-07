@@ -78,7 +78,12 @@ function App() {
         {result !== undefined && (
           <h1>
             คุณเป็น...
-            <span style={{ fontSize: "300%" }}>
+            <span
+              className={
+                result ? "stripe-flag-kondee" : "stripe-flag-konmaidee"
+              }
+              style={{ fontSize: "300%" }}
+            >
               {result ? "คนดี" : "คนไม่ดี"}
             </span>
           </h1>
