@@ -104,6 +104,14 @@ function App() {
             ลองใหม่
           </button>
         )}
+
+        <a
+          href="https://twitter.com/iannnnn/status/1423889025228689412?s=20"
+          target="_blank"
+          style={{ color: "white" }}
+        >
+          ที่มา
+        </a>
       </header>
     </div>
   );
