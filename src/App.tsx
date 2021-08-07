@@ -85,6 +85,12 @@ function App() {
         )}
 
         <p>คะแนน : {points}</p>
+
+        {result !== undefined && (
+          <button type="button" onClick={() => reset()}>
+            ลองใหม่
+          </button>
+        )}
       </header>
     </div>
   );
