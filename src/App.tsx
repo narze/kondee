@@ -52,11 +52,24 @@ function App() {
     }
   }
 
+  function reset() {
+    setPoints(0);
+    setQuestionIdx(0);
+    setResult(undefined);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>(คนดี)</h1>
-        {result !== undefined && result ? "คนดี" : "คนไม่ดี"}
+        {result !== undefined && (
+          <h1>
+            คุณเป็น...
+            <span style={{ fontSize: "300%" }}>
+              {result ? "คนดี" : "คนไม่ดี"}
+            </span>
+          </h1>
+        )}
         {result === undefined && (
           <>
             <p>{questions[questionIdx].question}</p>
