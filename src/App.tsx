@@ -1,12 +1,31 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
-const questions = [
-  { question: "ทำบุญ?", points: 2 },
+function shuffle(a: Array<any>): Array<any> {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let questions = shuffle([
+  { question: "ทำบุญ?", points: 1 },
   { question: "พาคนแก่ข้ามถนน?", points: 1 },
-  { question: "รักสถาบัน?", points: 112 },
-];
+  { question: "ช่วยงานชุมชน?", points: 1 },
+  { question: "ช่วยสัตว์บาดเจ็บ?", points: 1 },
+  { question: "บริจาคเลือด?", points: 1 },
+  { question: "บริจาคเงินการกุศล?", points: 1 },
+  { question: "ตัดเล็บสั้น?", points: 0.5 },
+  { question: "ปลูกป่า สร้างฝาย?", points: 1 },
+  { question: "เชื่อฟังพ่อแม่?", points: 1 },
+  { question: "ประหยัดน้ำไฟ?", points: 1 },
+  { question: "ชนะโอลิมปิก?", points: 0.5 },
+  { question: "พับผ้าห่ม?", points: 1 },
+  { question: "ช่วยเพื่อนตบมุก?", points: 1 },
+]).slice(0, 5);
+
+questions.push({ question: "รักสถาบัน?", points: 112 });
 
 function App() {
   const [points, setPoints] = useState(0);
@@ -22,8 +41,10 @@ function App() {
 
     if (questionIdx + 1 == questions.length) {
       if (yes) {
+        setPoints(() => questions[questionIdx].points);
         setResult(true);
       } else {
+        setPoints(() => -questions[questionIdx].points);
         setResult(false);
       }
     } else {
